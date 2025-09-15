@@ -1,0 +1,38 @@
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: frontend-web-hpa
+  namespace: microservice-demo
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: frontend-app
+  minReplicas: 2                    # Always have 2 for availability
+  maxReplicas: 20                   # Higher max - frontends can scale more
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 60      # Lower threshold - scale earlier
+  - type: Resource
+    resource:
+      name: memory
+      target:
+        type: Utilization
+        averageUtilization: 70      # Frontends use less memory typically
+  behavior:
+    scaleUp:
+      stabilizationWindowSeconds: 30   # Scale up FAST for user experience
+      policies:
+      - type: Percent
+        value: 100                     # Double pods quickly if needed
+        periodSeconds: 30
+    scaleDown:
+      stabilizationWindowSeconds: 300  # Scale down slowly to handle traffic spikes
+      policies:
+      - type: Percent
+        value: 25                      # More conservative scale down
+        periodSeconds: 60
