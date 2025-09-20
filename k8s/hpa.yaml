@@ -9,7 +9,7 @@ spec:
     kind: Deployment
     name: frontend-app
   minReplicas: 2                    # Always have 2 for availability
-  maxReplicas: 20                   # Higher max - frontends can scale more
+  maxReplicas: 4                   # Higher max - frontends can scale more
   metrics:
   - type: Resource
     resource:
