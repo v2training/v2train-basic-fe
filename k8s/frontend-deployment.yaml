@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: frontend-app
-        image: ${CONTAINER_REGISTRY}.azurecr.io/frontend-app:latest
+        image: ${CONTAINER_REGISTRY}.azurecr.io/frontend-app:${IMAGE_TAG}
         ports:
         - containerPort: 3000
         resources:

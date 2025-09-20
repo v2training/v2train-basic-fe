@@ -72,6 +72,8 @@ jobs:
 
       # Deploys application based on given manifest file
       - name: Deploys application
+        env:
+          IMAGE_TAG: ${{ github.sha }}
         uses: Azure/k8s-deploy@v4
         with:
           action: deploy
