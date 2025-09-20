@@ -7,7 +7,7 @@ on:
 
 env:
   CONTAINER_REGISTRY: ${{ secrets.CONTAINER_REGISTRY }}
-  CONTAINER_NAME: "frontend-api"
+  CONTAINER_NAME: "frontend-app"
   RESOURCE_GROUP: ${{ secrets.RESOURCE_GROUP }}
   CLUSTER_NAME: ${{ secrets.CLUSTER_NAME }}
   DEPLOYMENT_MANIFEST_PATH: "./k8s"
